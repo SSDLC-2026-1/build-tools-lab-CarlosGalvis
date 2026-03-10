@@ -43,5 +43,24 @@ class TestValidator(unittest.TestCase):
         }
         self.assertIn("Invalid registration code", validate_attendee(attendee))
 
+    def test_registration_code_examples(self):
+        valid_attendee = {
+            "name": "Elena",
+            "email": "elena@example.com",
+            "age": 29,
+            "ticket_type": "general",
+            "registration_code": "EV-1234"
+        }
+        self.assertNotIn("Invalid registration code", validate_attendee(valid_attendee))
+
+        invalid_attendee = {
+            "name": "Marco",
+            "email": "marco@example.com",
+            "age": 30,
+            "ticket_type": "vip",
+            "registration_code": "EV-12"
+        }
+        self.assertIn("Invalid registration code", validate_attendee(invalid_attendee))
+
 if __name__ == "__main__":
     unittest.main()
