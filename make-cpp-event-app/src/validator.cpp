@@ -24,6 +24,13 @@ vector<string> validateTicket(const Ticket& ticket) {
         errors.push_back("Invalid ticket status");
     }
 
+    if (regex_match(ticket.code, codePattern) && ticket.type == "vip") {
+        int number = stoi(ticket.code.substr(2));
+        if (number <= 500) {
+            errors.push_back("VIP tickets must have code greater than TK500");
+        }
+    }
+
     if (ticket.status != "active") {
         errors.push_back("Ticket is not active");
     }
